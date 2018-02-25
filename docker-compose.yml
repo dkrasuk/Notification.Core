@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  notificationapi.core:
+    image: notificationapi.core
+    build:
+      context: .
+      dockerfile: NotificationApi.Core\Dockerfile
