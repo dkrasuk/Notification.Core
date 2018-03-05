@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Notification.BusinessLayer.Services;
+using Notification.BusinessLayer.Services.Intarfaces;
 using Notification.Repository;
 using Serilog;
 using Serilog.Formatting.Json;
@@ -33,6 +35,7 @@ namespace NotificationApi.Core
             services.AddMvc();
 
             services.AddLogging();
+            services.AddTransient<ISmtpService, SmtpService>();
 
             services.AddSwaggerGen(c =>
             {

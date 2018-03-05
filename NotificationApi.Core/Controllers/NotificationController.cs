@@ -6,20 +6,43 @@ using Microsoft.AspNetCore.Mvc;
 using Notification.Repository;
 using Notification.Model;
 using Microsoft.Extensions.Logging;
+using Notification.BusinessLayer.Services.Intarfaces;
 
 namespace NotificationApi.Core.Controllers
 {
     [Route("api/[controller]")]
     public class NotificationController : Controller
     {
-        private NotificationContext _context { get; set; }
-        readonly ILogger<NotificationController> _logger;
-        public NotificationController(NotificationContext context, ILogger<NotificationController> logger)
+        private readonly NotificationContext _context;
+        private readonly ILogger<NotificationController> _logger;
+        private readonly ISmtpService _smtpService;
+
+        public NotificationController(NotificationContext context, ILogger<NotificationController> logger, ISmtpService smtpService)
         {
             _context = context;
             _logger = logger;
-          
+            _smtpService = smtpService;
         }
+
+        [HttpPost]
+        [Route("sendmail")]
+        public async Task<IActionResult> SendMail([FromBody]Notification.Model.Notification notification)
+        {
+            if (notification == null)
+                return BadRequest();
+
+            notification.Id = Guid.NewGuid().ToString();
+
+            await Task.Run(() =>
+            {
+                _context.Notifications.AddAsync(notification);
+                _context.SaveChanges();
+            });
+
+            await _smtpService.SendAsync(notification.Receiver, notification.Body, notification.Title);            
+            return Ok();
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -28,7 +51,7 @@ namespace NotificationApi.Core.Controllers
             _logger.LogError("This is Bad!");
             _logger.LogDebug("This is Debug!");
             return Ok(_context.Notifications.ToList().Take(10));
-            
+
         }
 
         [HttpGet("{id}")]
@@ -61,7 +84,7 @@ namespace NotificationApi.Core.Controllers
             return Ok(notify.Id);
         }
 
-  
+
         [HttpPut("")]
         public async Task<IActionResult> Put([FromBody]Notification.Model.Notification notify)
         {
@@ -78,7 +101,7 @@ namespace NotificationApi.Core.Controllers
             return Ok($"Update record {notify.Id} done!");
         }
 
-      
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -91,5 +114,6 @@ namespace NotificationApi.Core.Controllers
 
             return Ok();
         }
+
     }
 }
