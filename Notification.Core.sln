@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Repository", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Model", "Notification.Model\Notification.Model.csproj", "{3870AEC4-2A07-40C0-916E-6961F40B4055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.BusinessLayer", "..\Notification.BusinessLayer\Notification.BusinessLayer.csproj", "{EEE7F62C-0234-44D2-8FBA-FE66EC6C6DFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.BusinessLayer", "Notification.BusinessLayer\Notification.BusinessLayer.csproj", "{8C474FC3-AC60-4549-AAB4-2A89CF654648}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{3870AEC4-2A07-40C0-916E-6961F40B4055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3870AEC4-2A07-40C0-916E-6961F40B4055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3870AEC4-2A07-40C0-916E-6961F40B4055}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEE7F62C-0234-44D2-8FBA-FE66EC6C6DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEE7F62C-0234-44D2-8FBA-FE66EC6C6DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEE7F62C-0234-44D2-8FBA-FE66EC6C6DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEE7F62C-0234-44D2-8FBA-FE66EC6C6DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C474FC3-AC60-4549-AAB4-2A89CF654648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C474FC3-AC60-4549-AAB4-2A89CF654648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C474FC3-AC60-4549-AAB4-2A89CF654648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C474FC3-AC60-4549-AAB4-2A89CF654648}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Notification.BusinessLayer.Services;
-using Notification.BusinessLayer.Services.Intarfaces;
 using Notification.Repository;
+using Notification.Repository.Repositories;
 using Serilog;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.Elasticsearch;
@@ -36,6 +36,7 @@ namespace NotificationApi.Core
 
             services.AddLogging();
             services.AddTransient<ISmtpService, SmtpService>();
+            services.AddTransient<IRepository<Notification.Model.Notification>, NotificationRepository>();
 
             services.AddSwaggerGen(c =>
             {
@@ -44,10 +45,16 @@ namespace NotificationApi.Core
 
             //Use postgresql DB
             var sqlConnectionString = Configuration.GetConnectionString("NotificationConnectionStrings");
+
+
+
             services.AddDbContext<NotificationContext>(option =>
             option.UseNpgsql(sqlConnectionString, b => b.MigrationsAssembly("Notification.Core")
             .MigrationsHistoryTable("__EFMigrationsHistory", "dev")
-            ));
+
+            )
+
+                );
 
             services.AddScoped<NotificationContext>();
         }

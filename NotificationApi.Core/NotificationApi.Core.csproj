@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Notification.BusinessLayer\Notification.BusinessLayer.csproj" />
+    <ProjectReference Include="..\Notification.BusinessLayer\Notification.BusinessLayer.csproj" />
     <ProjectReference Include="..\Notification.Model\Notification.Model.csproj" />
     <ProjectReference Include="..\Notification.Repository\Notification.Repository.csproj" />
   </ItemGroup>

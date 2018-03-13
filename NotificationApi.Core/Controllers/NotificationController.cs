@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification.Repository;
 using Notification.Model;
 using Microsoft.Extensions.Logging;
-using Notification.BusinessLayer.Services.Intarfaces;
+using Notification.BusinessLayer.Services;
+using Notification.Repository.Repositories;
 
 namespace NotificationApi.Core.Controllers
 {
@@ -16,12 +17,14 @@ namespace NotificationApi.Core.Controllers
         private readonly NotificationContext _context;
         private readonly ILogger<NotificationController> _logger;
         private readonly ISmtpService _smtpService;
+        private readonly IRepository<Notification.Model.Notification> _repositoryNotification;
 
-        public NotificationController(NotificationContext context, ILogger<NotificationController> logger, ISmtpService smtpService)
+        public NotificationController(NotificationContext context, ILogger<NotificationController> logger, ISmtpService smtpService, IRepository<Notification.Model.Notification> repositoryNotification)
         {
             _context = context;
             _logger = logger;
             _smtpService = smtpService;
+            _repositoryNotification = repositoryNotification;
         }
 
         [HttpPost]
@@ -48,8 +51,7 @@ namespace NotificationApi.Core.Controllers
         public async Task<IActionResult> Get()
         {
             _logger.LogInformation("This is OK");
-            _logger.LogError("This is Bad!");
-            _logger.LogDebug("This is Debug!");
+
             return Ok(_context.Notifications.ToList().Take(10));
 
         }
